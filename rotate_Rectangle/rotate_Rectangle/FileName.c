@@ -8,6 +8,14 @@
 
 #define M_PI 3.14159265358979323846
 
+void hideCursor() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hConsole, &cursorInfo);
+    cursorInfo.bVisible = FALSE;  // 커서 숨기기
+    SetConsoleCursorInfo(hConsole, &cursorInfo);
+}
+
 typedef struct {
     float m[3][3]; // 3x3 행렬
 } Matrix3x3;
@@ -88,6 +96,7 @@ void draw(float rect[4][2], int width, int height) {
 }
 
 int main() {
+    hideCursor();
     // 사각형의 크기
     int rect_width = 11;
     int rect_height = 5;
