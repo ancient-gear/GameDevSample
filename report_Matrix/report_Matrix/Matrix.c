@@ -271,7 +271,7 @@ int main() {
         }
 
         if (spacePressed == 0) {
-            const char* text = "20211416유현욱";
+            const char* text = "20211416RyuHyunWook";
             int centerX = WIDTH / 4 - strlen(text) / 2; // 문자열 중앙 위치 계산
             int centerY = HEIGHT / 2;
             
