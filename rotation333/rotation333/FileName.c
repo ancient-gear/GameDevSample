@@ -19,7 +19,12 @@ typedef struct {
 void initIdentityMatrix(Matrix3x3* mat) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            mat->m[i][j] = (i == j) ? 1 : 0;
+            if (i == j) {
+                mat->m[i][j] = 1;
+            }
+            else {
+                mat->m[i][j] = 0;
+            }
         }
     }
 }
