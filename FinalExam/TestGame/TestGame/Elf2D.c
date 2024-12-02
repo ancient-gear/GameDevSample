@@ -70,6 +70,37 @@ void Elf2DDrawLine(int x1, int y1, int x2, int y2, char* Buffer, int width, int 
     }
 }
 
+void Elf2DDrawLine2(float x1, float y1, float x2, float y2, char* Buffer, int width, int height)
+{
+    int dx = abs((int)x2 - (int)x1);
+    int dy = abs((int)y2 - (int)y1);
+    int sx = ((int)x1 < (int)x2) ? 1 : -1;
+    int sy = ((int)y1 < (int)y2) ? 1 : -1;
+    int err = dx - dy;
+    
+    while (1) {
+        if ((int)x1 >= 0 && (int)x1 < width && (int)y1 >= 0 && (int)y1 < height)
+        {
+            Buffer[(int)y1 * (width * 2 + 1) + (int)x1 * 2] = '*';
+            Buffer[(int)y1 * (width * 2 + 1) + (int)x1 * 2 + 1] = '*';  // 첫 번째 문자 Buffer[(int)y1 * (width * 2 + 1) + (int)x1 * 2 + 1] = '*'; // 두 번째 문자
+        }
+
+        if ((int)x1 == (int)x2 && (int)y1 == (int)y2)
+            break;
+
+        int e2 = err * 2;
+        if (e2 > -dy)
+        {
+            err -= dy; x1 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y1 += sy;
+        }
+    }
+}
+
 
 void Elf2DSleep(int ms)
 {

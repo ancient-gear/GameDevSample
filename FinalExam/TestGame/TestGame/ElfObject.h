@@ -19,4 +19,18 @@ typedef struct
 
 }GameObject_Line;
 
+typedef struct
+{
+    // Transform
+    Vector2 Position;
+    float Rotation;
+    Vector2 Scale;
+
+    // Geometry
+    Vector2 Vertex[3];
+    
+    // 픽셀 채울 글자
+    char* Symbol;
+}GameObject_Triangle;
+
 #endif

@@ -3,8 +3,33 @@
 #include "ElfTime.h"
 #include "ElfObject.h"
 
-#define WIDTH 60
-#define HEIGHT 25
+#define WIDTH 40
+#define HEIGHT 24
+
+void InitializeTriangle(GameObject_Triangle* obj) {
+    // 정삼각형 초기화
+    obj->Position.x = 10;
+    obj->Position.y = 10;
+
+    obj->Rotation = 0;
+
+    // 정삼각형의 세 꼭짓점 설정
+    obj->Vertex[0].x = 0;
+    obj->Vertex[0].y = 0;
+
+    obj->Vertex[1].x = 10;
+    obj->Vertex[1].y = 0;
+
+    obj->Vertex[2].x = 5;
+    obj->Vertex[2].y = 8.66; // 한 변이 10인 정삼각형의 높이
+
+    // 화면 출력 심볼 입력
+    obj->Symbol = "@@";
+
+    // 크기 입력
+    obj->Scale.x = 1;
+    obj->Scale.y = 1;
+}
 
 void Initialize(GameObject_Line* obj, int objNum)
 {
@@ -93,17 +118,36 @@ void Render(GameObject_Line* obj, int objNum, char* Buf, int width, int height)
     lineA = multiply_matrix_vector(world, lineA);  // 점과 회전 행렬 곱셈 (Matrix3x3 * Vector3)
     lineB = multiply_matrix_vector(world, lineB);  // 점과 회전 행렬 곱셈 (Matrix3x3 * Vector3)
 
-    Elf2DDrawLine((int)lineA.x, (int)lineA.y, (int)lineB.x, (int)lineB.y, Buf, width, height);
+    Elf2DDrawLine2((int)lineA.x, (int)lineA.y, (int)lineB.x, (int)lineB.y, Buf, width, height);
+
+    /*
+    Vector3 vertexA, vertexB;
+    
+    for (int i = 0; i < 3; i++) {
+        vertexA.x = tri->Vertex[i].x;
+        vertexA.y = tri->Vertex[i].y;
+        vertexA.z = 1;
+        
+        vertexB.x = tri->Vertex[(i + 1) % 3].x;
+        vertexB.y = tri->Vertex[(i + 1) % 3].y;
+        vertexB.z = 1;
+        
+        vertexA = multiply_matrix_vector(world, vertexA);
+        vertexB = multiply_matrix_vector(world, vertexB);
+        
+        Elf2DDrawLine2((float)vertexA.x, (float)vertexA.y, (float)vertexB.x, (float)vertexB.y, Buf, width, height);
+    }
+    */
 }
 
 
 // 게임 루프
 int main() {
-    int fps = 60;
+    int fps = 30;
     double frameTime = 1000.0 / fps;
 
     // 전역 변수로 스크린 버퍼 선언
-    char screenBuffer[(WIDTH + 1) * HEIGHT];
+    char screenBuffer[(WIDTH + 1) * HEIGHT * 2];
     int screenWidth = WIDTH;
     int screenHeight = HEIGHT;
 
