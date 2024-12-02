@@ -6,7 +6,7 @@
 #define WIDTH 60
 #define HEIGHT 25
 
-void Initialize(GameObject_Line * obj, int objNum)
+void Initialize(GameObject_Line* obj, int objNum)
 {
     //객체 초기화(관절 3개)
     int i = 0;
